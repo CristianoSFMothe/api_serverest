@@ -9,3 +9,14 @@ Resource             env.resource
 Resource             service/login.resource
 
 *** Keywords ***
+Validate Status Code
+    [Arguments]        ${status_code}
+
+    Status Should Be    ${status_code}
+
+Validate Message
+    [Arguments]        ${expected_message}
+
+    ${actual_message}       Set Variable           ${message}
+
+    Should Be Equal          ${actual_message}      ${expected_message}
