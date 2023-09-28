@@ -1,3 +1,5 @@
+import random
+
 from faker import Faker
 
 fake = Faker()
@@ -26,11 +28,13 @@ def factory_create_user():
     email = fake.email()
     password = fake.password()
 
+    administrador = random.choice([True, False])
+
     user_create = {
         "nome": nome,
         "email": email,
         "password": password,
-        "administrador": "true"
+        "administrador": str(administrador).lower()
     }
 
     return user_create

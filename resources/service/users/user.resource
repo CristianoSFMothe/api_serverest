@@ -95,6 +95,7 @@ POST New User
 
     ${user_id}             Get From Dictionary    ${response}    _id
     Set Suite Variable      ${user_id}
+    
 
     [Return]    ${response}
 
