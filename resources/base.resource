@@ -11,7 +11,7 @@ Resource             service/users/user.resource
 
 *** Keywords ***
 Validate Status Code
-    [Arguments]        ${status_code}
+    [Arguments]        ${status_code}    
 
     Status Should Be    ${status_code}
 

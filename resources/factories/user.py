@@ -1,3 +1,8 @@
+from faker import Faker
+
+fake = Faker()
+
+
 def factory_auth_user():
     user_auth = {
         "email": "fulano@qa.com",
@@ -14,3 +19,18 @@ def factory_login_invalid_user_or_password():
     }
 
     return invalid_user_or_pass
+
+
+def factory_create_user():
+    nome = fake.name()
+    email = fake.email()
+    password = fake.password()
+
+    user_create = {
+        "nome": nome,
+        "email": email,
+        "password": password,
+        "administrador": "true"
+    }
+
+    return user_create

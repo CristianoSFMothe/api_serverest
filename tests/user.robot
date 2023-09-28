@@ -51,6 +51,25 @@ Deve retornar um usuário pelo o ID
     
     Validate Status Code    200
 
+Deve cadastrar um novo usuário
+    [Documentation]        Cadastro de um novo usuário
+    [Tags]                 create
+
+    ${payload}        Factory Create User
+
+    ${response}        POST New User    usuarios    ${payload}
+
+    ${user_id}        Set Variable    ${response["_id"]}
+
+    Validate Message    Cadastro realizado com sucesso
+
+    Log    ID do usuário cadastrado: ${user_id}
+
+    Validate Status Code    201
+    
+
+
+
 
     
 
