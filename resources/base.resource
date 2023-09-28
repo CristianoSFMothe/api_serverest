@@ -6,7 +6,8 @@ Library        Collections
 Library        factories/user.py
 
 Resource             env.resource
-Resource             service/login.resource
+Resource             service/users/user.resource
+
 
 *** Keywords ***
 Validate Status Code

@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation        Autenticação na API
 
-Resource    ../base.resource
+Resource    ../../base.resource
 
 *** Variables ***
 &{HEADERS}    Content-Type=application/json
@@ -49,4 +49,35 @@ Login Invalid User Or Passoword
     Set Suite Variable      ${message}
 
     [Return]    ${response}
+
+
+GET All User
+    [Arguments]        ${route}
+
+    ${response}        GET    ${BASE_URL}/${route}
+
+    ${data}            Set Variable    ${response.json()}
+    ${user_list}       Set Variable    ${data["usuarios"]}
+
+    ${quantity}        Set Variable    0  # Inicializa a contagem
+
+    FOR    ${user}    IN    @{user_list}
+        ${quantity}    Evaluate    ${quantity} + 1
+    END
+
+    [Return]            ${response}    ${quantity}
+
+
+GET One User
+    [Arguments]    ${route}    ${id_user}
+
+    ${response}        GET    ${BASE_URL}/${route}/${id_user}
+
+    [Return]           ${response} 
+
+
+
+
+   
+
 
