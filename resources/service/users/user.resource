@@ -32,13 +32,13 @@ POST Auth API
 
 
 Login Invalid User Or Passoword
-    [Arguments]        ${route}    ${payload}
+    [Arguments]        ${payload}
 
     Set Suite Variable    ${payload}        
 
     Set Variable    ${payload}
 
-    ${response}        POST    ${BASE_URL}/${route}
+    ${response}        POST    ${BASE_URL}/login
     ...                json=${payload}
     ...                headers=${HEADERS}
     ...                expected_status=any
@@ -52,9 +52,8 @@ Login Invalid User Or Passoword
 
 
 GET All User
-    [Arguments]        ${route}
 
-    ${response}        GET    ${BASE_URL}/${route}
+    ${response}        GET    ${BASE_URL}/usuarios
 
     ${data}            Set Variable    ${response.json()}
     ${user_list}       Set Variable    ${data["usuarios"]}
@@ -69,35 +68,62 @@ GET All User
 
 
 GET One User
-    [Arguments]    ${route}    ${id_user}
+    [Arguments]    ${id_user}
 
-    ${response}        GET    ${BASE_URL}/${route}/${id_user}
+    ${response}        GET    ${BASE_URL}/usuarios/${id_user}
 
     [Return]           ${response} 
 
 
 POST New User
-    [Arguments]    ${route}    ${payload}
+    [Arguments]    ${payload}
 
     Set Suite Variable    ${payload}        
 
     Set Variable    ${payload}
 
-    ${response}        POST    ${BASE_URL}/${route}
+    ${response}        POST    ${BASE_URL}/usuarios
     ...                json=${payload}
     ...                headers=${HEADERS}
     ...                expected_status=any
     
     ${response}         Set Variable           ${response.json()}  
 
-    ${message}              Get From Dictionary    ${response}    message 
-    Set Suite Variable      ${message}
+    ${message}           Get From Dictionary    ${response}    message 
+    ${message_expect}    Set Variable      ${response['message}  
 
-    ${user_id}             Get From Dictionary    ${response}    _id
-    Set Suite Variable      ${user_id}
+    ${user_id}  Set Variable  ${response['_id']}
     
+    Log    User created with ID: ${user_id}
 
     [Return]    ${response}
+
+PUT Update User
+    [Arguments]    ${payload}
+
+    ${response}    POST New User       ${payload}
+
+    ${user_id}          Set Variable    ${response["_id"]}
+
+    Log           User ID: ${user_id}
+
+    ${response}        PUT    ${BASE_URL}/usuarios/${user_id}
+    ...                json=${payload}
+    ...                headers=${HEADERS}
+    ...                expected_status=any
+    
+    ${response}         Set Variable    ${response.json()}  
+
+    ${message}          Get From Dictionary    ${response}    message 
+    Set Suite Variable  ${message}
+    
+
+    [Return]            ${response}
+
+
+    
+
+    
 
 
 

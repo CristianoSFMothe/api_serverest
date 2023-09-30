@@ -1,5 +1,6 @@
 *** Settings ***
-Documentation        Cenário para Autenticação
+Documentation        Cenário para Autenticação, criação, pesquisa, atualizção 
+...                  e remoção de usuários
 
 Resource        ../resources/base.resource
 
@@ -23,7 +24,7 @@ Não poder logar com usuário ou senha inválido
 
     ${payload}    Factory Login Invalid User Or Password
   
-    ${response}    Login Invalid User Or Passoword    Login    ${payload}
+    ${response}    Login Invalid User Or Passoword    ${payload}
 
     Validate Message    Email e/ou senha inválidos   
 
@@ -34,7 +35,7 @@ Deve retornar todos os usuários cadastrados
     [Documentation]    Retornar uma lista com todos os usuários cadastrados
     [Tags]    get_all
     
-    ${response}    ${quantity}    GET All User    usuarios
+    ${response}    ${quantity}    GET All User    
     
     ${is_greater}    Evaluate    ${quantity} > 0
 
@@ -47,7 +48,7 @@ Deve retornar um usuário pelo o ID
     [Documentation]        Retorna um usuário expecifico
     [Tags]                 get_one
 
-    ${response}    GET One User    usuarios    0uxuPY0cbmQhpEz1
+    ${response}    GET One User    0uxuPY0cbmQhpEz1
     
     Validate Status Code    200
 
@@ -57,7 +58,7 @@ Deve cadastrar um novo usuário
 
     ${payload}        Factory Create User
 
-    ${response}        POST New User    usuarios    ${payload}
+    ${response}        POST New User     ${payload}
 
     ${user_id}        Set Variable    ${response["_id"]}
 
@@ -66,6 +67,17 @@ Deve cadastrar um novo usuário
     Log    ID do usuário cadastrado: ${user_id}
 
     Validate Status Code    201
+
+Deve atualizar os dados do usuário
+    [Documentation]        Atualização de um usuário existente
+    [Tags]                 update
+
+    ${payload}        Factory Update User
+
+    ${response}       PUT Update User    {payload}
+    
+   
+
     
 
 

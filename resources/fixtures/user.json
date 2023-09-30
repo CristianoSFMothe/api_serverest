@@ -1,0 +1,8 @@
+{
+  "authentication": {
+    "user": {
+      "email": "fulano@qa.com",
+      "password": "teste"
+    }
+  }
+}
