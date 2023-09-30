@@ -8,10 +8,15 @@ Deve pode loga com usuário pré-cadastrado
     [Documentation]        Logar com usuário existente
     [Tags]                 login
 
-    ${user}    Get Fixture    user    authentication
+    # ${user}    Get Fixture    user    authentication
+
+    ${user}    Get Fixture    user    authentication 
 
     POST User Session    ${user}
+
     
+
+   
 
     # ${authentication_data}    Get Fixture    user  
 
