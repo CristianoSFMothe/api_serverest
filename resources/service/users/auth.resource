@@ -27,6 +27,12 @@ POST User Session
     ${message}              Get From Dictionary    ${response}    message 
     Set Suite Variable      ${message}
 
+    ${email}              Get From Dictionary    ${response}    email 
+    Set Suite Variable      ${email}
+
+    ${password}              Get From Dictionary    ${response}    password 
+    Set Suite Variable      ${password}
+
     [Return]    ${response}
 
 
@@ -55,34 +61,12 @@ Clean Empty
     ...                headers=${HEADERS}
     ...                expected_status=any
     
-    ${response}         Set Variable           ${response.json()}
-
-    
+    ${response}         Set Variable           ${response.json()}    
 
     [Return]    ${response}
 
 
-Validate Error Response
-    [Arguments]    ${response_json}
 
-    ${expected_error}    Set Variable    
-    ...    "email": "email não pode ficar em branco",
-    ...    "password": "password não pode ficar em branco"
-     
-
-    Run Keyword If    'email' in ${expected_error}    
-    ...    Validate Error Key    ${response_json}    
-    ...    email    ${expected_error['email']}
-    
-    Run Keyword If    'password' in ${expected_error}    
-    ...    Validate Error Key    ${response_json}    
-    ...    password    ${expected_error['password']}
-
-Validate Error Key
-    [Arguments]    ${response_json}    ${key}    ${expected_value}
-
-    ${actual_value}    Get From Dictionary    ${response_json}    ${key}
-    Should Be Equal As Strings    ${actual_value}    ${expected_value}
 
 
 

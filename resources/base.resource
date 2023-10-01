@@ -31,3 +31,17 @@ Validate Message
     ${actual_message}       Set Variable           ${message}
 
     Should Be Equal          ${actual_message}      ${expected_message}
+
+Email Field Cannot Be Empty
+    [Arguments]        ${expected_message}
+
+    ${actual_message}       Set Variable           ${email}
+
+    Should Be Equal          ${actual_message}      ${expected_message}
+Validate Password Empty
+    [Arguments]        ${expected_message}
+
+    ${actual_message}       Set Variable           ${password}
+
+    Should Be Equal          ${actual_message}      ${expected_message}
+    
