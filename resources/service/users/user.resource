@@ -6,9 +6,7 @@ Resource    ../../base.resource
 *** Variables ***
 &{HEADERS}    Content-Type=application/json
 
-
 *** Keywords ***
-
 GET All User
 
     ${response}        GET    ${BASE_URL}/usuarios

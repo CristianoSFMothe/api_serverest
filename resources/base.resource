@@ -11,7 +11,6 @@ Resource       service/users/user.resource
 
 
 *** Keywords ***
-
 Get Fixture
     [Arguments]    ${file_name}   
     ${data}    Load Json From File

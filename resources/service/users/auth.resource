@@ -3,10 +3,8 @@ Documentation        Autenticação na API
 
 Resource    ../../base.resource
 
-
 *** Variables ***
 &{HEADERS}    Content-Type=application/json
-
 
 *** Keywords ***
 POST User Session
@@ -29,8 +27,7 @@ POST User Session
 
 
 Login Invalid User Or Passoword
-    [Arguments]        ${user}
-   
+    [Arguments]        ${user}   
 
     ${response}        POST    ${BASE_URL}/login
     ...                json=${user}[invalid]
@@ -45,8 +42,7 @@ Login Invalid User Or Passoword
     [Return]    ${response}
 
 Clean Empty
-    [Arguments]        ${user}
-   
+    [Arguments]        ${user}   
 
     ${response}        POST    ${BASE_URL}/login
     ...                json=${user}
