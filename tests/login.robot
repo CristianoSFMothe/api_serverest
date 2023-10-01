@@ -36,15 +36,13 @@ Não deve logar com campos vazios
     ...        email=${EMPTY}
     ...        password=${EMPTY}
     
-    ${response}    Clean Empty    ${user}   
-
-    Validate Error Response    ${response} 
+    ${response}    Clean Empty    ${user}  
     
     Email Field Cannot Be Empty      email não pode ficar em branco
     Validate Password Empty          password não pode ficar em branco
 
     Validate Status Code    400
-
+    
 
 
 

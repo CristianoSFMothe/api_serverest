@@ -17,21 +17,13 @@ POST User Session
     ...                headers=${HEADERS}
     ...                expected_status=any
 
-    ${response}         Set Variable           ${response.json()} 
-
-    
+    ${response}         Set Variable           ${response.json()}     
 
     ${token}    Get From Dictionary    ${response}    authorization
     Set Suite Variable    ${token}   
 
     ${message}              Get From Dictionary    ${response}    message 
-    Set Suite Variable      ${message}
-
-    ${email}              Get From Dictionary    ${response}    email 
-    Set Suite Variable      ${email}
-
-    ${password}              Get From Dictionary    ${response}    password 
-    Set Suite Variable      ${password}
+    Set Suite Variable      ${message}   
 
     [Return]    ${response}
 
@@ -61,7 +53,13 @@ Clean Empty
     ...                headers=${HEADERS}
     ...                expected_status=any
     
-    ${response}         Set Variable           ${response.json()}    
+    ${response}         Set Variable           ${response.json()}  
+
+    ${email}              Get From Dictionary    ${response}    email 
+    Set Suite Variable      ${email}
+
+    ${password}              Get From Dictionary    ${response}    password 
+    Set Suite Variable      ${password}  
 
     [Return]    ${response}
 

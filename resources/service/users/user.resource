@@ -12,6 +12,8 @@ Resource    ../../base.resource
 GET All User
 
     ${response}        GET    ${BASE_URL}/usuarios
+    ...                headers=${HEADERS}
+    ...                expected_status=any 
 
     ${data}            Set Variable    ${response.json()}
     ${user_list}       Set Variable    ${data["usuarios"]}
@@ -29,6 +31,22 @@ GET One User
     [Arguments]    ${id_user}
 
     ${response}        GET    ${BASE_URL}/usuarios/${id_user}
+    ...                headers=${HEADERS}
+    ...                expected_status=any 
+
+    [Return]           ${response} 
+
+GET User Not Found
+    [Arguments]    ${id_user}
+
+    ${response}        GET    ${BASE_URL}/usuarios/${id_user}
+    ...                headers=${HEADERS}
+    ...                expected_status=any    
+    
+    ${response}         Set Variable           ${response.json()}  
+
+    ${message}              Get From Dictionary    ${response}    message 
+    Set Suite Variable      ${message}
 
     [Return]           ${response} 
 

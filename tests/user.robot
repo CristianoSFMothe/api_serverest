@@ -27,6 +27,16 @@ Deve retornar um usuário pelo o ID
     
     Validate Status Code    200
 
+Usuário não encontrado
+    [Documentation]        Retorna um usuário expecifico
+    [Tags]                 user_not
+
+    ${response}    GET User Not Found    0uxuPY0cbmQhpEz2
+
+    Validate Message        Usuário não encontrado
+    
+    Validate Status Code    400
+
 Deve cadastrar um novo usuário
     [Documentation]        Cadastro de um novo usuário
     [Tags]                 create
