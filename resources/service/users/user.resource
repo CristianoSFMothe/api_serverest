@@ -1,113 +1,95 @@
-# *** Settings ***
-# Documentation        Cenários de criação, pesquisa, atualização e deleção
+*** Settings ***
+Documentation        Cenários de criação, pesquisa, atualização e deleção
 
-# Resource    ../../base.resource
+Resource    ../../base.resource
 
-# *** Variables ***
-# &{HEADERS}    Content-Type=application/json
+*** Variables ***
+&{HEADERS}    Content-Type=application/json
 
 
-# *** Keywords ***
+*** Keywords ***
 
-# Login Invalid User Or Passoword
-#     [Arguments]        ${payload}
+GET All User
 
-#     Set Suite Variable    ${payload}        
+    ${response}        GET    ${BASE_URL}/usuarios
 
-#     Set Variable    ${payload}
+    ${data}            Set Variable    ${response.json()}
+    ${user_list}       Set Variable    ${data["usuarios"]}
 
-#     ${response}        POST    ${BASE_URL}/login
-#     ...                json=${payload}
-#     ...                headers=${HEADERS}
-#     ...                expected_status=any
+    ${quantity}        Set Variable    0  
+
+    FOR    ${user}    IN    @{user_list}
+        ${quantity}    Evaluate    ${quantity} + 1
+    END
+
+    [Return]            ${response}    ${quantity}
+
+
+GET One User
+    [Arguments]    ${id_user}
+
+    ${response}        GET    ${BASE_URL}/usuarios/${id_user}
+
+    [Return]           ${response} 
+
+
+POST New User
+    [Arguments]    ${user}    
+
+    ${response}        POST    ${BASE_URL}/usuarios
+    ...                json=${user}[create]
+    ...                headers=${HEADERS}
+    ...                expected_status=any
     
-#     ${response}         Set Variable           ${response.json()}  
+    ${response}         Set Variable           ${response.json()}  
 
-#     ${message}              Get From Dictionary    ${response}    message 
-#     Set Suite Variable      ${message}
+    ${message}              Get From Dictionary    ${response}    message 
+    Set Suite Variable      ${message}
 
-#     [Return]    ${response}
-
-
-# GET All User
-
-#     ${response}        GET    ${BASE_URL}/usuarios
-
-#     ${data}            Set Variable    ${response.json()}
-#     ${user_list}       Set Variable    ${data["usuarios"]}
-
-#     ${quantity}        Set Variable    0  # Inicializa a contagem
-
-#     FOR    ${user}    IN    @{user_list}
-#         ${quantity}    Evaluate    ${quantity} + 1
-#     END
-
-#     [Return]            ${response}    ${quantity}
-
-
-# GET One User
-#     [Arguments]    ${id_user}
-
-#     ${response}        GET    ${BASE_URL}/usuarios/${id_user}
-
-#     [Return]           ${response} 
-
-
-# POST New User
-#     [Arguments]    ${payload}
-
-#     Set Suite Variable    ${payload}        
-
-#     Set Variable    ${payload}
-
-#     ${response}        POST    ${BASE_URL}/usuarios
-#     ...                json=${payload}
-#     ...                headers=${HEADERS}
-#     ...                expected_status=any
+    ${user_id}  Set Variable  ${response["_id"]}
     
-#     ${response}         Set Variable           ${response.json()}  
+    Log    User created with ID: ${user_id}
 
-#     ${message}           Get From Dictionary    ${response}    message 
-#     ${message_expect}    Set Variable      ${response['message}  
+    [Return]    ${response}
 
-#     ${user_id}  Set Variable  ${response['_id']}
+POST Duplicate E-mail
+    [Arguments]    ${user}
     
-#     Log    User created with ID: ${user_id}
+    ${response}        POST    ${BASE_URL}/usuarios
+    ...                json=${user}[duplicate]
+    ...                headers=${HEADERS}
+    ...                expected_status=any
+    
+    ${response}         Set Variable           ${response.json()}  
 
-#     [Return]    ${response}
+    ${message}              Get From Dictionary    ${response}    message 
+    Set Suite Variable      ${message}
+
+    [Return]    ${response}
 
 # PUT Update User
-#     [Arguments]    ${payload}
+#     [Arguments]    ${user}
 
-#     ${response}    POST New User       ${payload}
+#     ${user_data}    Get Fixture    user    authentication
 
-#     ${user_id}          Set Variable    ${response["_id"]}
+#     ${response_new_user}    POST New User    ${user_data}
 
-#     Log           User ID: ${user_id}
+#     ${user_id}    Set Variable    ${response_new_user["_id"]}
 
-#     ${response}        PUT    ${BASE_URL}/usuarios/${user_id}
-#     ...                json=${payload}
-#     ...                headers=${HEADERS}
-#     ...                expected_status=any
+#     Log To Console    ${user_id}
+#     Log To Console    ${user_data}
+
+#     ${response}    PUT    ${BASE_URL}/usuarios/${user_id}
+#     ...            json=${user}[update]
+#     ...            headers=${HEADERS}
+#     ...            expected_status=any    
     
 #     ${response}         Set Variable    ${response.json()}  
 
 #     ${message}          Get From Dictionary    ${response}    message 
 #     Set Suite Variable  ${message}
     
+#     Log To Console    ${response}
 
 #     [Return]            ${response}
-
-
-    
-
-    
-
-
-
-
-
-
-   
-
 

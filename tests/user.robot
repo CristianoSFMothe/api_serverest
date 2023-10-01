@@ -1,82 +1,73 @@
-# *** Settings ***
-# Documentation        Cenário para Autenticação, criação, pesquisa, atualizção 
-# ...                  e remoção de usuários
+*** Settings ***
+Documentation        Criação, pesquisa, atualizção e remoção de usuários
 
-# Resource        ../resources/base.resource
+Resource        ../resources/base.resource
 
-# *** Test Cases ***
-# Deve pode loga com usuário pré-cadastrado
-#     [Documentation]        Logar com usuário existente
-#     [Tags]                 login
+*** Test Cases ***
 
-#     ${payload}        Factory Auth User
-
-#     ${response}        POST Auth API    login    ${payload}
-
-#     Validate Message    Login realizado com sucesso   
-
-#     Validate Status Code    200
-
-
-# Não poder logar com usuário ou senha inválido
-#     [Documentation]        Login usuário ou senha invválid
-#     [Tags]                 fall
-
-#     ${payload}    Factory Login Invalid User Or Password
-  
-#     ${response}    Login Invalid User Or Passoword    ${payload}
-
-#     Validate Message    Email e/ou senha inválidos   
-
-#     Validate Status Code    401
-
-
-# Deve retornar todos os usuários cadastrados
-#     [Documentation]    Retornar uma lista com todos os usuários cadastrados
-#     [Tags]    get_all
+Deve retornar todos os usuários cadastrados
+    [Documentation]    Retornar uma lista com todos os usuários cadastrados
+    [Tags]    get_all
     
-#     ${response}    ${quantity}    GET All User    
+    ${response}    ${quantity}    GET All User    
     
-#     ${is_greater}    Evaluate    ${quantity} > 0
+    ${is_greater}    Evaluate    ${quantity} > 0
 
-#     Should Be True    ${is_greater}
-#     Log    Total de Usuários é: ${quantity}
+    Should Be True    ${is_greater}
+    Log    Total de Usuários é: ${quantity}
 
-#     Validate Status Code    200
+    Validate Status Code    200
 
-# Deve retornar um usuário pelo o ID
-#     [Documentation]        Retorna um usuário expecifico
-#     [Tags]                 get_one
 
-#     ${response}    GET One User    0uxuPY0cbmQhpEz1
+Deve retornar um usuário pelo o ID
+    [Documentation]        Retorna um usuário expecifico
+    [Tags]                 get_one
+
+    ${response}    GET One User    0uxuPY0cbmQhpEz1
     
-#     Validate Status Code    200
+    Validate Status Code    200
 
-# Deve cadastrar um novo usuário
-#     [Documentation]        Cadastro de um novo usuário
-#     [Tags]                 create
+Deve cadastrar um novo usuário
+    [Documentation]        Cadastro de um novo usuário
+    [Tags]                 create
 
-#     ${payload}        Factory Create User
+    ${user}    Get Fixture    create_user     
 
-#     ${response}        POST New User     ${payload}
+    ${response}    POST New User    ${user}
 
-#     ${user_id}        Set Variable    ${response["_id"]}
+    ${user_id}        Set Variable    ${response["_id"]}
 
-#     Validate Message    Cadastro realizado com sucesso
+    Validate Message    Cadastro realizado com sucesso
 
-#     Log    ID do usuário cadastrado: ${user_id}
+    Log    ID do usuário cadastrado: ${user_id}    
 
-#     Validate Status Code    201
+    Validate Status Code    201
+
+Não pode cadastrar usuário com e-mail existente
+    [Documentation]        Cadastro de um novo usuário
+    [Tags]                 duplicate
+
+    ${user}    Get Fixture    create_user    
+
+    ${response}    POST Duplicate E-mail    ${user}
+
+    Validate Message    Este email já está sendo usado  
+
+    Validate Status Code    400
 
 # Deve atualizar os dados do usuário
 #     [Documentation]        Atualização de um usuário existente
 #     [Tags]                 update
 
-#     ${payload}        Factory Update User
+#     ${user}    Get Fixture    user    
 
-#     ${response}       PUT Update User    {payload}
+#     ${response}    PUT Update User    ${user}
+
+    
+
     
    
+
 
     
 

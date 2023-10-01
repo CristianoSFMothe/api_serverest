@@ -1,0 +1,14 @@
+{
+  "create": {
+    "nome": "Cristiano Mothe",
+    "email": "cristiano45@qa.com.br",
+    "password": "Abc@123",
+    "administrador": "true"
+  },
+  "duplicate": {
+    "nome": "Cristiano Mothe",
+    "email": "cristiano45@qa.com.br",
+    "password": "Abc@123",
+    "administrador": "true"
+  }
+}

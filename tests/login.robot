@@ -8,7 +8,7 @@ Deve pode loga com usuário pré-cadastrado
     [Documentation]        Logar com usuário existente
     [Tags]                 login
 
-    ${user}    Get Fixture    user    authentication     
+    ${user}    Get Fixture    auth     
 
     POST User Session    ${user}
 
@@ -20,7 +20,7 @@ Não deve pode loga com usuário invalido
     [Documentation]        Logar com usuário existente
     [Tags]                 invalid
 
-    ${user}    Get Fixture    user    authentication     
+    ${user}    Get Fixture    auth     
 
     Login Invalid User Or Passoword    ${user}
     

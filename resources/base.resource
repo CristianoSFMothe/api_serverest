@@ -13,13 +13,12 @@ Resource       service/users/user.resource
 *** Keywords ***
 
 Get Fixture
-    [Arguments]    ${file_name}    ${scenario}
-
+    [Arguments]    ${file_name}   
     ${data}    Load Json From File
     ...        ${EXECDIR}/resources/fixtures/${file_name}.json
     ...        encoding=utf-8
     
-    [Return]    ${data}[${scenario}]
+    [Return]    ${data}
 
 Validate Status Code
     [Arguments]        ${status_code}    
