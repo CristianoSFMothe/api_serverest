@@ -65,6 +65,21 @@ Não pode cadastrar usuário com e-mail existente
 
     Validate Status Code    400
 
+Deve criar usuário com os campo obrigatórios sem preencher
+    [Documentation]        Atualização de um usuário existente
+    [Tags]                 create_empty
+
+    ${user}    Get Fixture    create_user    
+
+    ${response}    POST New User    ${user}
+
+    Name Field Cannot Be Empty        nome é obrigatório
+    Email Field Cannot Be Empty       email é obrigatório
+    Password Field Cannot Be Empty    password é obrigatório
+    Admin Field Cannot Be Empty       administrador é obrigatório
+
+    Validate Status Code    400
+
 Deve atualizar os dados do usuário
     [Documentation]        Atualização de um usuário existente
     [Tags]                 update
@@ -84,6 +99,7 @@ Deve atualizar os dados do usuário
     Validate Message    Registro alterado com sucesso
 
     Validate Status Code    200
+
 
 Deve atualizar com os campo obrigatórios sem preencher
     [Documentation]        Atualização de um usuário existente

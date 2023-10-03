@@ -68,6 +68,32 @@ POST New User
 
     [Return]    ${response}
 
+POST Empty Field
+    [Arguments]    ${user}    
+
+    ${response}        POST    ${BASE_URL}/usuarios
+    ...                json=${user}[clean]
+    ...                headers=${HEADERS}
+    ...                expected_status=any
+    
+    ${response}         Set Variable           ${response.json()}  
+
+    ${nome}               Get From Dictionary    ${response}    nome 
+    Set Suite Variable    ${nome}
+
+    Log To Console    ${nome}
+
+    ${password}             Get From Dictionary    ${response}    password 
+    Set Suite Variable      ${password}
+
+    ${email}              Get From Dictionary    ${response}    email 
+    Set Suite Variable    ${email}
+
+    ${administrador}        Get From Dictionary    ${response}    administrador 
+    Set Suite Variable      ${administrador}
+
+    [Return]    ${response}
+
 POST Duplicate E-mail
     [Arguments]    ${user}
     
