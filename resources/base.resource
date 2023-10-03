@@ -31,30 +31,31 @@ Validate Message
 
     Should Be Equal          ${actual_message}      ${expected_message}
 
-Email Field Cannot Be Empty
-    [Arguments]        ${expected_message}
-
-    ${actual_message}       Set Variable           ${email}
-
-    Should Be Equal          ${actual_message}      ${expected_message}
-Password Field Cannot Be Empty
-    [Arguments]        ${expected_message}
-
-    ${actual_message}       Set Variable           ${password}
-
-    Should Be Equal          ${actual_message}      ${expected_message}
-
 Name Field Cannot Be Empty
-    [Arguments]        ${expected_message}
+    [Arguments]        ${expected_message_name}
 
-    ${actual_message}       Set Variable           ${nome}
+    ${actual_message_name}       Set Variable           ${nome}
 
-    Should Be Equal          ${actual_message}      ${expected_message}
+    Should Be Equal          ${actual_message_name}      ${expected_message_name}
+
+Email Field Cannot Be Empty
+    [Arguments]        ${expected_message_email}
+
+    ${actual_message_email}       Set Variable           ${email}
+
+    Should Be Equal          ${actual_message_email}      ${expected_message_email}
+
+Passoword Field Cannot Be Empty
+    [Arguments]        ${expected_message_password}
+
+    ${actual_message_password}       Set Variable           ${password}
+
+    Should Be Equal          ${actual_message_password}      ${expected_message_password}
     
 Admin Field Cannot Be Empty
-    [Arguments]        ${expected_message}
+    [Arguments]        ${expected_message_admin}
 
-    ${actual_message}       Set Variable           ${administrador}
+    ${actual_message_admin}       Set Variable           ${administrador}
 
-    Should Be Equal          ${actual_message}      ${expected_message}
+    Should Be Equal          ${actual_message_admin}      ${expected_message_admin}
     

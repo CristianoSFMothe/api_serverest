@@ -59,6 +59,20 @@ Clean Empty
 
     [Return]    ${response}
 
+Login Email Field Cannot Be Empty
+    [Arguments]        ${expected_message}
+
+    ${actual_message}       Set Variable           ${email}
+
+    Should Be Equal          ${actual_message}      ${expected_message}
+Login Password Field Cannot Be Empty
+    [Arguments]        ${expected_message}
+
+    ${actual_message}       Set Variable           ${password}
+
+    Should Be Equal          ${actual_message}      ${expected_message}
+    
+
 
 
 

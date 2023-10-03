@@ -132,24 +132,27 @@ Update Clean Empty
     ...            headers=${HEADERS}
     ...            expected_status=any    
     
-    ${response}         Set Variable    ${response.json()}      
-
-    ${message}          Get From Dictionary    ${response}    message 
-    Set Suite Variable  ${message}
+    ${response}         Set Variable    ${response.json()}
 
     ${nome}               Get From Dictionary    ${response}    nome 
     Set Suite Variable    ${nome}
 
-    Log To Console    ${nome}
+    Log To Console    Nome: ${nome}
 
     ${password}             Get From Dictionary    ${response}    password 
     Set Suite Variable      ${password}
 
+    Log To Console    Password: ${password}
+
     ${email}              Get From Dictionary    ${response}    email 
     Set Suite Variable    ${email}
 
+    Log To Console    Email: ${email}
+
     ${administrador}        Get From Dictionary    ${response}    administrador 
     Set Suite Variable      ${administrador}
+
+    Log To Console    Administrador: ${administrador}
 
     [Return]            ${response}
 
