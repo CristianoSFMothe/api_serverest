@@ -83,29 +83,17 @@ POST Duplicate E-mail
 
     [Return]    ${response}
 
-# PUT Update User
-#     [Arguments]    ${user}
-
-#     ${user_data}    Get Fixture    user    authentication
-
-#     ${response_new_user}    POST New User    ${user_data}
-
-#     ${user_id}    Set Variable    ${response_new_user["_id"]}
-
-#     Log To Console    ${user_id}
-#     Log To Console    ${user_data}
-
-#     ${response}    PUT    ${BASE_URL}/usuarios/${user_id}
-#     ...            json=${user}[update]
-#     ...            headers=${HEADERS}
-#     ...            expected_status=any    
+PUT Update User
+    [Arguments]    ${user}    ${user_id} 
+    ${response}    PUT    ${BASE_URL}/usuarios/${user_id}
+    ...            json=${user}[update]
+    ...            headers=${HEADERS}
+    ...            expected_status=any    
     
-#     ${response}         Set Variable    ${response.json()}  
+    ${response}         Set Variable    ${response.json()}  
 
-#     ${message}          Get From Dictionary    ${response}    message 
-#     Set Suite Variable  ${message}
-    
-#     Log To Console    ${response}
+    ${message}          Get From Dictionary    ${response}    message 
+    Set Suite Variable  ${message}
 
-#     [Return]            ${response}
+    [Return]            ${response}
 

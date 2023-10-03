@@ -65,25 +65,18 @@ Não pode cadastrar usuário com e-mail existente
 
     Validate Status Code    400
 
-# Deve atualizar os dados do usuário
-#     [Documentation]        Atualização de um usuário existente
-#     [Tags]                 update
+Deve atualizar os dados do usuário
+    [Documentation]        Atualização de um usuário existente
+    [Tags]                 update
 
-#     ${user}    Get Fixture    user    
+    ${user}    Get Fixture    update_user    
 
-#     ${response}    PUT Update User    ${user}
+    ${response}    POST New User    ${user}
 
-    
+    Validate Message    Cadastro realizado com sucesso
 
-    
-   
+    ${user_id}        Set Variable    ${response["_id"]}   
 
+    ${response}    PUT Update User    ${user}    ${user_id}
 
-    
-
-
-
-
-    
-
-
+    Validate Message    Registro alterado com sucesso

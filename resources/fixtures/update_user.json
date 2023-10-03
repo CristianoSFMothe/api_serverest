@@ -1,0 +1,14 @@
+{
+  "create": {
+    "nome": "Update user",
+    "email": "update-user@qa.com.br",
+    "password": "Abc@123",
+    "administrador": "true"
+  },
+  "update": {
+    "nome": "Update user New",
+    "email": "update-user@qa.com.br",
+    "password": "Abc@123",
+    "administrador": "true"
+  }
+}
