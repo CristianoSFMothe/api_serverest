@@ -10,5 +10,11 @@
     "email": "update-user@qa.com.br",
     "password": "Abc@123",
     "administrador": "true"
+  },
+  "clean": {
+    "nome": "",
+    "email": "",
+    "password": "",
+    "administrador": ""
   }
 }

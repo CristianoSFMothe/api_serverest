@@ -37,10 +37,24 @@ Email Field Cannot Be Empty
     ${actual_message}       Set Variable           ${email}
 
     Should Be Equal          ${actual_message}      ${expected_message}
-Validate Password Empty
+Password Field Cannot Be Empty
     [Arguments]        ${expected_message}
 
     ${actual_message}       Set Variable           ${password}
+
+    Should Be Equal          ${actual_message}      ${expected_message}
+
+Name Field Cannot Be Empty
+    [Arguments]        ${expected_message}
+
+    ${actual_message}       Set Variable           ${nome}
+
+    Should Be Equal          ${actual_message}      ${expected_message}
+    
+Admin Field Cannot Be Empty
+    [Arguments]        ${expected_message}
+
+    ${actual_message}       Set Variable           ${administrador}
 
     Should Be Equal          ${actual_message}      ${expected_message}
     

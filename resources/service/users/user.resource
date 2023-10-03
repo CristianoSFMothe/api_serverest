@@ -85,6 +85,7 @@ POST Duplicate E-mail
 
 PUT Update User
     [Arguments]    ${user}    ${user_id} 
+
     ${response}    PUT    ${BASE_URL}/usuarios/${user_id}
     ...            json=${user}[update]
     ...            headers=${HEADERS}
@@ -96,4 +97,35 @@ PUT Update User
     Set Suite Variable  ${message}
 
     [Return]            ${response}
+
+Update Clean Empty
+    [Arguments]        ${user}    ${user_id}
+
+    ${response}    PUT    ${BASE_URL}/usuarios/${user_id}
+    ...            json=${user}[clean]
+    ...            headers=${HEADERS}
+    ...            expected_status=any    
+    
+    ${response}         Set Variable    ${response.json()}      
+
+    ${message}          Get From Dictionary    ${response}    message 
+    Set Suite Variable  ${message}
+
+    ${nome}               Get From Dictionary    ${response}    nome 
+    Set Suite Variable    ${nome}
+
+    Log To Console    ${nome}
+
+    ${password}             Get From Dictionary    ${response}    password 
+    Set Suite Variable      ${password}
+
+    ${email}              Get From Dictionary    ${response}    email 
+    Set Suite Variable    ${email}
+
+    ${administrador}        Get From Dictionary    ${response}    administrador 
+    Set Suite Variable      ${administrador}
+
+    [Return]            ${response}
+
+
 

@@ -39,7 +39,7 @@ Não deve logar com campos vazios
     ${response}    Clean Empty    ${user}  
     
     Email Field Cannot Be Empty      email não pode ficar em branco
-    Validate Password Empty          password não pode ficar em branco
+    Password Field Cannot Be Empty          password não pode ficar em branco
 
     Validate Status Code    400
     

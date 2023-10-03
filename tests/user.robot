@@ -75,8 +75,37 @@ Deve atualizar os dados do usuário
 
     Validate Message    Cadastro realizado com sucesso
 
+    Validate Status Code    201
+
     ${user_id}        Set Variable    ${response["_id"]}   
 
     ${response}    PUT Update User    ${user}    ${user_id}
 
     Validate Message    Registro alterado com sucesso
+
+    Validate Status Code    200
+
+Deve atualizar com os campo obrigatórios sem preencher
+    [Documentation]        Atualização de um usuário existente
+    [Tags]                 update_empty
+
+    ${user}    Get Fixture    update_user    
+
+    ${response}    POST New User    ${user}
+
+    Validate Message    Cadastro realizado com sucesso
+
+    Validate Status Code    201
+
+    ${user_id}        Set Variable    ${response["_id"]}   
+
+    ${response}    PUT Update User    ${user}    ${user_id}
+
+    Name Field Cannot Be Empty        nome é obrigatório
+    Email Field Cannot Be Empty       email é obrigatório
+    Password Field Cannot Be Empty    password é obrigatório
+    Admin Field Cannot Be Empty       administrador é obrigatório
+
+    Validate Status Code    400
+
+
