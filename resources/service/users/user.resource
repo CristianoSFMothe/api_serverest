@@ -158,3 +158,17 @@ Update Clean Empty
 
 
 
+
+DELETE User 
+    [Arguments]    ${user}         ${user_id}
+
+    ${response}        DELETE    ${BASE_URL}/usuarios/${user_id}
+    ...                headers=${HEADERS}
+    ...                expected_status=any
+    
+    ${response}         Set Variable           ${response.json()}  
+
+    ${message}              Get From Dictionary    ${response}    message 
+    Set Suite Variable      ${message}
+
+    [Return]    ${response}
